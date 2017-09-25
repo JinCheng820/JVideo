@@ -13,19 +13,18 @@ export default {
     data() {
         return {}
     },
-    props: ['VideoDom'],
     methods: {
       changePlayStatus: function() {
         let _this = this;
         this.$store.commit("playAndpause");
         if(this.$store.state.play){   //实时获取播放时间定时任务
-            this.VideoDom.play();
+            this.$store.state.videoDom.play();
             this.clockGetCurrentTime = setInterval(function(){
             _this.$emit('GetCurrentTime');
         }, 500)
         }else{
             clearInterval(this.clockGetCurrentTime); //清除获取播放时间定时任务
-            this.VideoDom.pause();
+            this.$store.state.videoDom.pause();
         }
       }
     },

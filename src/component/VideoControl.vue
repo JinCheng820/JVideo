@@ -1,26 +1,28 @@
 <template>
     <div class="VideoControl">
-        <PlayControl :VideoDom="VideoDom" @GetCurrentTime='GetCurrentTime'></PlayControl>
-        <TimeShow :VideoDom="VideoDom" :currentTime='currentTime'></TimeShow>
+        <PlayControl @GetCurrentTime='GetCurrentTime'></PlayControl>
+        <TimeShow :currentTime='currentTime'></TimeShow>
+        <TimeLine :currentTime='currentTime'></TimeLine>
     </div>
 </template>
 <script>
 import PlayControl from './PlayControl.vue'
 import TimeShow from './TimeShow.vue'
+import TimeLine from './TimeLine.vue'
 export default {
     data() {
         return {
             currentTime: 0
         }
     },
-    props:['VideoDom'],
     components: {
         PlayControl,
-        TimeShow
+        TimeShow,
+        TimeLine
     },
     methods: {
         GetCurrentTime: function() {   //获取实时视频播放时间位置
-            this.currentTime = this.VideoDom.currentTime;
+            this.currentTime = this.$store.state.videoDom.currentTime;
         }
     }
 }

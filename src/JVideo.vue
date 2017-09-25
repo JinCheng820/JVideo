@@ -4,7 +4,7 @@
             <video :src="videoSource" id="Jvdo" ref='Jvdo'>
             </video>
         </div>
-        <VideoControl :VideoDom="VideoDom"></VideoControl>
+        <VideoControl></VideoControl>
     </div>
 </template>
 <script>
@@ -13,7 +13,6 @@ export default {
     data() {
         return {
             videoSource: 'src/assets/test.mp4',
-            VideoDom: false
         }
     },
     mounted: function() {
@@ -25,7 +24,8 @@ export default {
     methods: {
         GetVideoLength: function() {   
             if (this.$refs.Jvdo) {
-                this.VideoDom = this.$refs.Jvdo;   //获取播放器dom对象
+                this.$store.commit("getVideoDom",this.$refs.Jvdo);
+                this.$store.commit("getVideoLen",this.$refs.Jvdo.duration);
                 clearInterval(this.clockGetTime);  //清除检查定时任务
             }
         }

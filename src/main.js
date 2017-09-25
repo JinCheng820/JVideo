@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import JVideo from './JVideo.vue'
+import app from './App.vue'
 
 
 Vue.use(Vuex);
@@ -8,19 +8,26 @@ Vue.use(Vuex);
 const store = new Vuex.Store({
   state: {
     play: false,
-    videoLength: ''
+    videoLength: '',
+    videoDom: ''
   },
   mutations: {
     playAndpause (state) {
       state.play = !state.play;
+    },
+    getVideoLen (state,len) {
+      state.videoLength = len;
+    },
+    getVideoDom (state,dom) {
+      state.videoDom = dom;
     }
   }
 })
 
 new Vue({
-  el: '#JVideo',
+  el: '#app',
   store,
-  render: h => h(JVideo)
+  render: h => h(app)
 })
 
 

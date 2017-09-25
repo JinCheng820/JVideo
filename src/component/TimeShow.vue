@@ -7,16 +7,12 @@
 export default {
     data() {
         return {
-            VideoLength: '',
             curTime: '00:00'
         }
     },
-    props: ['VideoDom','currentTime'],
+    props: ['currentTime'],
     methods: {
-        GetVideoLength: function() {
-            this.VideoLength = this.timeFormat(this.VideoDom.duration);
-        },
-        timeFormat: function(time) {  //时间格式化
+        timeFormat: function(time) { //时间格式化
             let h = Math.floor(time / 3600 % 24);
             let m = Math.floor(time / 60 % 60);
             let s = Math.ceil((time % 60));
@@ -34,11 +30,13 @@ export default {
         }
     },
     watch: {
-        VideoDom: function() {
-            this.GetVideoLength();
-        },
-        currentTime: function(val,old) {
+        currentTime: function(val, old) {
             this.curTime = this.timeFormat(val);
+        }
+    },
+    computed: {
+        VideoLength: function(){
+            return this.timeFormat(this.$store.state.videoLength)
         }
     }
 }
