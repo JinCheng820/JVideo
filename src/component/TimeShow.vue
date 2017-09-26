@@ -24,6 +24,7 @@ export default {
     display: inline-block;
     color: #FFF;
     height: 3rem;
+    width: 6rem;
     vertical-align: middle;
 }
 

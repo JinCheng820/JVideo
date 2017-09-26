@@ -1,8 +1,8 @@
 <template>
     <div class="TimeLine">
-        <div class='main-line' ref='mainLine'>
-            <div class='current-line' :style= "'width:' + currentPosition"></div>
-            <div class="position-point" :style="'left:' + currentPosition"></div>
+        <div class='main-line' ref='mainLine' @click='playFromClick()'>
+            <div class='current-line' :style="'width:' + currentPosition"></div>
+            <div class="position-point" :style="'left:' + currentPosition" draggable="true"></div>
         </div>
     </div>
 </template>
@@ -15,7 +15,15 @@ export default {
         }
     },
     props: ['currentTime'],
-    methods: {},
+    methods: {
+        playFromClick: function() {
+            let e = event || window.event;
+            let newpos = e.clientX - this.$refs.mainLine.getBoundingClientRect().left
+            this.currentPosition = newpos +'px'
+            let newcur= this.$store.state.videoLength * newpos/this.$refs.mainLine.offsetWidth
+            this.$store.state.videoDom.currentTime = newcur
+        }
+    },
     watch: {
         currentTime: function() {
             this.curTime = Math.round(this.currentTime)
@@ -31,12 +39,12 @@ export default {
 .TimeLine {
     display: inline-block;
     position: relative;
-    width: 65%;
+    width: 70%;
     height: 0.1rem;
     margin-left: 20px;
-    margin-bottom: 0.9rem;
     background-color: #FFF;
 }
+
 
 .TimeLine .position-point {
     position: absolute;
@@ -50,6 +58,7 @@ export default {
 .TimeLine .position-point:hover {
     background-color: #8eccff;
 }
+
 
 .TimeLine .current-line {
     display: inline-block;
