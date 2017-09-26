@@ -18,6 +18,6 @@ export default {
 <style>
 html,
 body {
-    font-size: 10px;
+    font-size: 12px;
 }
 </style>

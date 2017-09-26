@@ -12,7 +12,7 @@ import VideoControl from './component/VideoControl.vue'
 export default {
     data() {
         return {
-            videoSource: 'src/assets/test.mp4',
+            videoSource: 'src/assets/test.mov',
         }
     },
     mounted: function() {
@@ -36,11 +36,6 @@ export default {
 }
 </script>
 <style>
-html,
-body {
-    font-size: 10px;
-}
-
 .JVideo {
     width: 80rem;
     margin: 0 auto;
