@@ -1,10 +1,11 @@
 <template>
     <div class="JVideo">
-        <div class="video-block">
+        <div class="video-block" ref='JvBlock' @mouseleave='hideControl'>
             <video :src="videoSource" id="Jvdo" ref='Jvdo'>
             </video>
+            <VideoControl ref='videoControl'></VideoControl>
         </div>
-        <VideoControl></VideoControl>
+        
     </div>
 </template>
 <script>
@@ -12,7 +13,7 @@ import VideoControl from './component/VideoControl.vue'
 export default {
     data() {
         return {
-            videoSource: 'src/assets/test.mov',
+            videoSource: 'src/assets/test.mp4'
         }
     },
     mounted: function() {
@@ -25,9 +26,13 @@ export default {
         GetVideoLength: function() {   
             if (this.$refs.Jvdo) {
                 this.$store.commit("getVideoDom",this.$refs.Jvdo);
+                this.$store.commit("getVideoBlock",this.$refs.JvBlock);
                 this.$store.commit("getVideoLen",this.$refs.Jvdo.duration);
                 clearInterval(this.clockGetTime);  //清除检查定时任务
             }
+        },
+        hideControl: function() {
+            this.$refs.videoControl.hideControl();
         }
     },
     components: {
@@ -37,18 +42,36 @@ export default {
 </script>
 <style>
 .JVideo {
+    position: relative;
     width: 80rem;
     margin: 0 auto;
     border: 1px solid #000;
 }
 
 .JVideo .video-block {
-    display: grid;
+    display: flex;
 }
 
 video {
     width: 100%;
-    object-fit: fill;
-    height: 500px;
+    height: 100%;
+    background-color: #000;
+}
+
+    
+
+
+/* 屏蔽全屏时video默认组件 */
+video::-webkit-media-controls,
+    video::-moz-media-controls,
+    video::-webkit-media-controls-enclosure{
+    display:none !important;
+}
+
+video::-webkit-media-controls-panel,
+video::-webkit-media-controls-panel-container,
+video::-webkit-media-controls-start-playback-button {
+    display:none !important;
+    -webkit-appearance: none;
 }
 </style>

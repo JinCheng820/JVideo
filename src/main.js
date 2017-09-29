@@ -9,7 +9,8 @@ const store = new Vuex.Store({
   state: {
     play: false,
     videoLength: '',
-    videoDom: ''
+    videoDom: '',
+    videoBlock: ''
   },
   mutations: {
     playAndpause (state) {
@@ -20,6 +21,9 @@ const store = new Vuex.Store({
     },
     getVideoDom (state,dom) {
       state.videoDom = dom;
+    },
+    getVideoBlock (state,dom) {
+      state.videoBlock = dom;
     }
   }
 })

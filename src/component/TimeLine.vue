@@ -17,9 +17,11 @@ export default {
     props: ['currentTime'],
     methods: {
         playFromClick: function() {
-            let e = event || window.event;
-            let newpos = e.clientX - this.$refs.mainLine.getBoundingClientRect().left
-            this.currentPosition = newpos +'px'
+            let e = window.event;
+            let newpos = (e.clientX - this.$refs.mainLine.getBoundingClientRect().left);
+            let rate = (newpos/this.$refs.mainLine.clientWidth)*100;
+            console.log(rate)
+            this.currentPosition = rate +'%'
             let newcur= this.$store.state.videoLength * newpos/this.$refs.mainLine.offsetWidth
             this.$store.state.videoDom.currentTime = newcur
         }
@@ -30,7 +32,11 @@ export default {
         },
         curTime: function() {
             let rate = this.curTime / this.$store.state.videoLength;
-            this.currentPosition = Math.round(this.$refs.mainLine.offsetWidth * rate) + 'px'
+            if (rate>=1) {
+                this.currentPosition = '100%'
+            }else {
+                this.currentPosition = rate*100 + '%'
+            }
         }
     }
 }
@@ -39,10 +45,14 @@ export default {
 .TimeLine {
     display: inline-block;
     position: relative;
-    width: 70%;
+    width: 76%;
     height: 0.1rem;
     margin-left: 20px;
     background-color: #FFF;
+}
+
+.TimeLine::-webkit-full-screen {
+    width: 100% !important; 
 }
 
 

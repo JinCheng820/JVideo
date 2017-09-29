@@ -18,7 +18,8 @@ export default {
         return {
             voice: true,
             voiceChange: false,
-            currentVoice: '8rem'
+            currentVoice: '8rem',
+            voiceRate: 1
         }
     },
     methods: {
@@ -26,7 +27,7 @@ export default {
             if(this.voice){
                 this.$store.state.videoDom.volume=0;
             }else{
-                this.$store.state.videoDom.volume=1;
+                this.$store.state.videoDom.volume=this.voiceRate;
             }
             this.voice = !this.voice
         },
@@ -43,9 +44,9 @@ export default {
         changeVoice: function() {
             let e = event || window.event;
             let newpos =this.$refs.vline.clientHeight - (e.clientY - this.$refs.vline.getBoundingClientRect().top)
-
             this.currentVoice = newpos +'px'
             this.$store.state.videoDom.volume = (newpos/this.$refs.vline.clientHeight).toFixed(2)
+            this.voiceRate = (newpos/this.$refs.vline.clientHeight).toFixed(2)
         }
     },
     computed: {
@@ -59,6 +60,7 @@ export default {
 .voice-control {
     display: inline-block;
     position: relative;
+    float: right;
 }
 .voice-control .voice-control-btn,
 .voice-control .novoice-control-btn{
@@ -88,13 +90,15 @@ export default {
     height: 8rem;
     display: inline-block;
     background-color: #000;
+    border: 1px;
+    border-style: solid;
+    border-color: #000;
 }
 
 .voice-control .voice-control-line .current-voice-line {
     position: absolute;
     bottom: 0;
-    left: 0.2rem;
-    width: 0.6rem;
+    width: 100%;
     display: inline-block;
     background-color: #FFF;
 }

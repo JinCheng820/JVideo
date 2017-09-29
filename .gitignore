@@ -3,8 +3,9 @@ node_modules/
 dist/
 npm-debug.log
 yarn-error.log
-
+src/assets/*.mp4
 # Editor directories and files
+
 .idea
 *.suo
 *.ntvs*
