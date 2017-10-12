@@ -1,13 +1,13 @@
 <template>
     <div class="voice-control" @mouseover='openVoiceChange' @mouseleave='closeVoiceChange'>
-        <button class="voice-btn voice-control-btn" v-if='voice' @click='changeVoiceStatue' >
+        <button class="voice-btn voice-control-btn" v-if='voice' @click='changeVoiceStatue'>
             <img src="src/assets/voice.png">
         </button>
         <button class="voice-btn novoice-control-btn" v-if='!voice' @click='changeVoiceStatue'>
             <img src="src/assets/no-voice.png">
         </button>
         <div class="voice-control-line" v-if="voiceChange" @click='changeVoice' ref='vline'>
-            <div class='current-voice-line' :style="'height:' + currentVoice">     
+            <div class='current-voice-line' :style="'height:' + currentVoice">
             </div>
         </div>
     </div>
@@ -24,10 +24,10 @@ export default {
     },
     methods: {
         changeVoiceStatue: function() {
-            if(this.voice){
-                this.$store.state.videoDom.volume=0;
-            }else{
-                this.$store.state.videoDom.volume=this.voiceRate;
+            if (this.voice) {
+                this.$store.state.videoDom.volume = 0;
+            } else {
+                this.$store.state.videoDom.volume = this.voiceRate;
             }
             this.voice = !this.voice
         },
@@ -38,38 +38,37 @@ export default {
         },
         closeVoiceChange: function() {
             if (this.voiceChange) {
-                this.voiceChange = !this.voiceChange
+                this.voiceChange = this.voiceChange
             }
         },
         changeVoice: function() {
             let e = event || window.event;
-            let newpos =this.$refs.vline.clientHeight - (e.clientY - this.$refs.vline.getBoundingClientRect().top)
-            this.currentVoice = newpos +'px'
-            this.$store.state.videoDom.volume = (newpos/this.$refs.vline.clientHeight).toFixed(2)
-            this.voiceRate = (newpos/this.$refs.vline.clientHeight).toFixed(2)
+            let newpos = this.$refs.vline.clientHeight - (e.clientY - this.$refs.vline.getBoundingClientRect().top)
+            this.currentVoice = newpos + 'px'
+            this.$store.state.videoDom.volume = (newpos / this.$refs.vline.clientHeight).toFixed(2)
+            this.voiceRate = (newpos / this.$refs.vline.clientHeight).toFixed(2)
         }
     },
     computed: {
-        playStatue: function() {  //获取播放状态决定显示按钮
-            return this.$store.state.play
-        }
+
     }
 }
 </script>
 <style>
 .voice-control {
-    display: inline-block;
     position: relative;
     float: right;
+    margin-right: 10px;
 }
+
 .voice-control .voice-control-btn,
-.voice-control .novoice-control-btn{
+.voice-control .novoice-control-btn {
     height: 3rem;
     width: 3rem;
     background-color: #000;
     outline: none;
     border: 0;
-    padding: 0; 
+    padding: 0;
 }
 
 

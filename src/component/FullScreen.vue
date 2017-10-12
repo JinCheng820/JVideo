@@ -33,8 +33,7 @@ export default {
 </script>
 <style>
 .fullscreen {
-    display: inline-block;
-    margin-right: 10px;
+    margin-left: 10px;
     float: right;
 }
 

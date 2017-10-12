@@ -19,10 +19,10 @@ export default {
         playFromClick: function() {
             let e = window.event;
             let newpos = (e.clientX - this.$refs.mainLine.getBoundingClientRect().left);
-            let rate = (newpos/this.$refs.mainLine.clientWidth)*100;
+            let rate = (newpos / this.$refs.mainLine.clientWidth) * 100;
             console.log(rate)
-            this.currentPosition = rate +'%'
-            let newcur= this.$store.state.videoLength * newpos/this.$refs.mainLine.offsetWidth
+            this.currentPosition = rate + '%'
+            let newcur = this.$store.state.videoLength * newpos / this.$refs.mainLine.offsetWidth
             this.$store.state.videoDom.currentTime = newcur
         }
     },
@@ -32,10 +32,10 @@ export default {
         },
         curTime: function() {
             let rate = this.curTime / this.$store.state.videoLength;
-            if (rate>=1) {
+            if (rate >= 1) {
                 this.currentPosition = '100%'
-            }else {
-                this.currentPosition = rate*100 + '%'
+            } else {
+                this.currentPosition = rate * 100 + '%'
             }
         }
     }
@@ -52,7 +52,7 @@ export default {
 }
 
 .TimeLine::-webkit-full-screen {
-    width: 100% !important; 
+    width: 100% !important;
 }
 
 

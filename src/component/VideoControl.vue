@@ -1,10 +1,10 @@
 <template>
-    <div class="VideoControl" :style="'opacity:' + controlerOpacity" @mouseover='showControl'>
+    <div class="VideoControl" :style="'opacity:' + controlerOpacity" @mouseover='showControl' @mouseleave='hideControl'>
         <PlayControl @GetCurrentTime='GetCurrentTime'></PlayControl>
         <TimeShow :currentTime='currentTime'></TimeShow>
         <TimeLine :currentTime='currentSec'></TimeLine>
         <VoiceControl></VoiceControl>
-        <FullScreen></FullScreen>
+        <FullScreen @hideControl='hideControl'></FullScreen>
     </div>
 </template>
 <script>

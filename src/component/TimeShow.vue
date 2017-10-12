@@ -1,6 +1,7 @@
 <template>
     <div class="time-show">
-        <span>{{currentTime}}</span><span>/{{VideoLength}}</span>
+        <span>{{currentTime}}</span>
+        <span>/{{VideoLength}}</span>
     </div>
 </template>
 <script>
@@ -13,7 +14,7 @@ export default {
     },
     props: ['currentTime'],
     computed: {
-        VideoLength: function(){
+        VideoLength: function() {
             return factory.timeFormat(this.$store.state.videoLength)
         }
     }
@@ -26,9 +27,5 @@ export default {
     height: 3rem;
     width: 6rem;
     vertical-align: middle;
-}
-
-.time-show span {
-    
 }
 </style>
